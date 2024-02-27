@@ -1,31 +1,6 @@
 #include "binary_trees.h"
 
 /**
- * find_last_common_ancestor - Finds the last common ancestor of two nodes.
- * @n1: The first node.
- * @n2: The second node.
- *
- * Return: The last common ancestor node,
- * or NULL if no common found.
- */
-binary_tree_t *find_last_common_ancestor(binary_tree_t *n1, binary_tree_t *n2)
-{
-	while (n1)
-	{
-		binary_tree_t *tmp = n2;
-
-		while (tmp)
-		{
-			if (n1 == tmp)
-				return (n1);
-			tmp = tmp->parent;
-		}
-		n1 = n1->parent;
-	}
-	return (NULL);
-}
-
-/**
  * binary_tree_depth - Measures the depth of a node in a binary tree.
  * @node: Apointer to the node to measure the depth of.
  *
@@ -48,13 +23,13 @@ size_t binary_tree_depth(const binary_tree_t *node)
  * or NULL if no common ancestor found.
  */
 binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
-		                     const binary_tree_t *second)
+		const binary_tree_t *second)
 {
 	if (!first || !second)
 		return (NULL);
-	
-	binary_tree_t *p1 = (binary_tree_t *)first;
-	binary_tree_t *p2 = (binary_tree_t *)second;
+
+	const binary_tree_t *p1 = first;
+	const binary_tree_t *p2 = second;
 
 	size_t d1 = binary_tree_depth(p1);
 	size_t d2 = binary_tree_depth(p2);
@@ -75,7 +50,7 @@ binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
 	while (p1 && p2)
 	{
 		if (p1 == p2)
-			return (p1);
+			return ((binary_tree_t *)p1);
 		p1 = p1->parent;
 		p2 = p2->parent;
 	}
