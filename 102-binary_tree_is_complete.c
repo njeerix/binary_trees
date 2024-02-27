@@ -22,25 +22,38 @@ size_t binary_tree_size(const binary_tree_t *tree)
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
+	size_t size;
+	int i;
+	binary_tree_t **queue, *node;
+	int front = -1, rear = -1;
+
 	if (!tree)
 		return (0);
 
-	size_t size = binary_tree_size(tree);
-	size_t i = 0;
+	size = binary_tree_size(tree);
+	queue = malloc(sizeof(binary_tree_t *) * size);
 
-	while (tree)
+	if (!queue)
+		return (0);
+
+	queue[++rear] = (binary_tree_t *)tree;
+
+	while (++front <= rear)
 	{
-		if (!tree->left && tree->right)
+		node = queue[front];
+		if (!node->left)
 			return (0);
-		if (i >= size)
+		queue[++rear] = node->left;
+
+		if (!node->right)
 			return (0);
-		if (!tree->left || !tree->right)
-			i++;
-		if (tree->left)
-			tree = tree->left;
-		else
-			tree = tree->right;
+		queue[++rear] = node->right;
 	}
 
+	for (i = 0; i <= rear; i++)
+		if (queue[i]->left || queue[i]->right)
+			return (0);
+
+	free(queue);
 	return (1);
 }
