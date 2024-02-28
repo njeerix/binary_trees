@@ -8,6 +8,8 @@
 
 /* Data structure */
 
+/* Binary tree struct */
+
 /**
  * struct binary_tree_s - Binary tree node
  *
@@ -24,6 +26,12 @@ struct binary_tree_s
     struct binary_tree_s *right;
 };
 
+/* AVL tree struct */
+struct avl_s
+{
+	struct binary_tree_s *tree;
+};
+
 typedef struct binary_tree_s binary_tree_t;
 typedef struct binary_tree_s bst_t;
 typedef struct binary_tree_s avl_t;
@@ -38,6 +46,7 @@ binary_tree_t *binary_tree_insert_left(binary_tree_t *parent, int value);
 binary_tree_t *binary_tree_insert_right(binary_tree_t *parent, int value);
 void binary_tree_delete(binary_tree_t *tree);
 void binary_tree_print(const binary_tree_t *tree);
+avl_t *avl_insert(avl_t **tree, int value);
 
 /* Binary Tree Properties */
 int binary_tree_is_leaf(const binary_tree_t *node);
@@ -66,6 +75,9 @@ size_t binary_tree_nodes(const binary_tree_t *tree);
 /* Binary Tree Balance Factor */
 int binary_tree_balance(const binary_tree_t *tree);
 
+/* AVL tree function prototypes */
+avl_t *avl_remove(avl_t *root, int value);
+
 int binary_tree_is_full(const binary_tree_t *tree);
 int binary_tree_is_perfect(const binary_tree_t *tree);
 binary_tree_t *binary_tree_sibling(binary_tree_t *node);
@@ -82,13 +94,13 @@ bst_t *bst_search(const bst_t *tree, int value);
 bst_t *bst_remove(bst_t *root, int value);
 int binary_tree_is_avl(const binary_tree_t *tree);
 avl_t *array_to_avl(int *array, size_t size);
-avl_t *avl_remove(avl_t *root, int value);
 avl_t *sorted_array_to_avl(int *array, size_t size);
 int binary_tree_is_heap(const binary_tree_t *tree);
 heap_t *heap_insert(heap_t **root, int value);
 heap_t *array_to_heap(int *array, size_t size);
 int heap_extract(heap_t **root);
 int *heap_to_sorted_array(heap_t *heap, size_t *size);
-avl_t *avl_insert(avl_t **tree, int value);
+size_t height(const binary_tree_t *tree);
+avl_t *binary_tree_minimum(const avl_t *tree);
 
 #endif
