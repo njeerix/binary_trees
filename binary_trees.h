@@ -102,5 +102,8 @@ int heap_extract(heap_t **root);
 int *heap_to_sorted_array(heap_t *heap, size_t *size);
 size_t height(const binary_tree_t *tree);
 avl_t *binary_tree_minimum(const avl_t *tree);
+binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
+heap_t *heap_insert(heap_t **root, int value);
+heap_t *find_parent(heap_t *root);
 
 #endif
